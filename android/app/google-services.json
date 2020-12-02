@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "832192746686",
+    "firebase_url": "https://psuclubs-e24f6.firebaseio.com",
+    "project_id": "psuclubs-e24f6",
+    "storage_bucket": "psuclubs-e24f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832192746686:android:e2b937c2a4ff392d61faef",
+        "android_client_info": {
+          "package_name": "com.example.psu_club"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832192746686-4jl82odubct5i0h7ii0hglu3t7v7h5i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psu_club",
+            "certificate_hash": "b47ceb37d6c57c7bb88ed2071ad07c0f3c57104d"
+          }
+        },
+        {
+          "client_id": "832192746686-bnl1rev88sjasu188h4crklg7vi2bbmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChnH3WJ0yLRBuUZg9u8471olpy9D_OvU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832192746686-bnl1rev88sjasu188h4crklg7vi2bbmq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
