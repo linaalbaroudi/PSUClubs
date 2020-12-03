@@ -3,11 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psu_club/Faculty_Views/ActivityParticipants_view.dart';
 import 'package:psu_club/Faculty_Views/Faculty_Drawer.dart';
+import 'package:psu_club/Models/Club.dart';
 import 'package:psu_club/Models/Faculty.dart';
 import 'package:psu_club/Models/Event.dart' as clubEvent;
 import 'package:psu_club/Faculty_Views/Clubevents_view.dart';
 
 import 'EditClubEvent_view.dart';
+import 'bottomtab_screen.dart';
 
 class InternalClubEventView extends StatefulWidget {
   static const routeName = '/Internal-club-event-view';
@@ -24,12 +26,13 @@ class _InternalClubEventPageState extends State<InternalClubEventView> {
     super.initState();
     getArgs(widget.exampleEvent, widget.user);
   }
-
+  Club hostingClub;
   clubEvent.Event passedEvent;
   Faculty passedUser;
   void getArgs(clubEvent.Event att1, Faculty att2) {
     passedUser = att2;
     passedEvent = att1;
+    hostingClub= passedEvent.hostingClub;
   }
   Row ownerButtons() {
     if (passedEvent.leader.userID != passedUser.userID)
@@ -122,7 +125,7 @@ class _InternalClubEventPageState extends State<InternalClubEventView> {
                 ),
                 color: Colors.red,
                 onPressed: () {
-                  _confirmDeleteDialog(context, passedEvent, passedUser);
+                  _confirmDeleteDialog(context, passedEvent, passedUser,hostingClub);
                 },
                 child: FittedBox(
                                   child: Text(
@@ -228,7 +231,7 @@ void _showDialog3(BuildContext context) {
   ));
 }
 
-Future<void> _confirmDeleteDialog(BuildContext ctx, clubEvent.Event passedEvent, Faculty passedUser) async {
+Future<void> _confirmDeleteDialog(BuildContext ctx, clubEvent.Event passedEvent, Faculty passedUser,Club hosting) async {
   return showDialog<void>(
     context: ctx,
     barrierDismissible: false, // user must tap button!
@@ -248,15 +251,15 @@ Future<void> _confirmDeleteDialog(BuildContext ctx, clubEvent.Event passedEvent,
             onPressed: ()async {
               passedEvent.hostingClub.clubEvents.remove(passedEvent);
               final referenceDB = FirebaseDatabase.instance.reference();
-             await referenceDB.child("ClubEvents").child(passedEvent.hostingClub.title).child(passedEvent.title).remove();
-              _showDialog3(ctx);
-              //database issue
-              Navigator.push(
+             await referenceDB.child("ClubEvents").child(hosting.title).child(passedEvent.title).remove();
+             // _showDialog3(ctx);
+             // database issue
+            Navigator.push(
                   ctx,
                   MaterialPageRoute(
-                      builder: (ctx) => Clubevents(
-                          exampleClub: passedEvent.hostingClub,
-                          user: passedUser)));
+                      builder: (context) =>
+                          BottomTabsScreen2(index: 1, user: passedUser)));
+             //Navigator.pop(ctx);
             },
           ),
           FlatButton(

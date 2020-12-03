@@ -1,5 +1,3 @@
-//import 'dart:html' as html;
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
@@ -79,8 +77,7 @@ class _EditClubState extends State<EditClub> {
   // controllers for clearing the data on submit
   final _clubFormKey = GlobalKey<FormState>();
 
-  // final _controllerTitle = new TextEditingController();
-  // final _controllerDescription = new TextEditingController();
+  String _oldTitle ;
 
   // manage image input
   io.File _image ;
@@ -98,6 +95,7 @@ class _EditClubState extends State<EditClub> {
     _passedUser = att2;
     _passedClub = passedClub;
     _newClub = _passedClub;
+    _oldTitle = _passedClub.title;
   }
 
   //InputDecoration
@@ -292,10 +290,8 @@ class _EditClubState extends State<EditClub> {
                                     _imageURL = _url;
                                     _newClub.logo = _imageURL;
                                   }
-                                  _newClub.saveEdited(_passedClub.title);
+                                  _newClub.saveEdited(_oldTitle);
                                   _showDialog(context);
-                                  // _controllerTitle.clear();
-                                  // _controllerDescription.clear();
                                 }
 
                                 _saveForm();

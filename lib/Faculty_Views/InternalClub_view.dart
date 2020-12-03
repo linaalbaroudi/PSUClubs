@@ -317,7 +317,7 @@ Future<void> _confirmDeleteDialog(
                   ctx,
                   MaterialPageRoute(
                       builder: (context) =>
-                          BottomTabsScreen2(index: 2, user: passedUser)));
+                          BottomTabsScreen2(index: 1, user: passedUser)));
             },
           ),
           FlatButton(

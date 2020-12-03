@@ -3,11 +3,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:psu_club/Faculty_Views/Faculty_Drawer.dart';
+import 'package:psu_club/Models/Club.dart';
 import 'package:psu_club/Models/Faculty.dart';
 import 'package:psu_club/Models/Workshop.dart';
 import 'package:psu_club/Faculty_Views/ActivityParticipants_view.dart';
 import 'package:psu_club/Faculty_Views/Workshops_view.dart';
 import 'EditWorkshop.dart';
+import 'bottomtab_screen.dart';
 
 class InternalWorkshopView extends StatefulWidget {
   static const routeName = '/Internal-workshop-view';
@@ -27,9 +29,11 @@ class _InternalWorkshopPageState extends State<InternalWorkshopView> {
 
   Workshop passedWorkshop;
   Faculty passedUser;
+  Club hostingClub;
   void getArgs(Workshop att1, Faculty att2) {
     passedUser = att2;
     passedWorkshop = att1;
+    hostingClub=passedWorkshop.hostingClub;
   }
 
   Row ownerButton() {
@@ -123,7 +127,7 @@ class _InternalWorkshopPageState extends State<InternalWorkshopView> {
                 ),
                 color: Colors.red,
                 onPressed: () {
-                  _confirmDeleteDialog(passedWorkshop, context, passedUser);
+                  _confirmDeleteDialog(passedWorkshop, context, passedUser,hostingClub);
                 },
                 child: FittedBox(
                   child: Text(
@@ -225,7 +229,7 @@ class _InternalWorkshopPageState extends State<InternalWorkshopView> {
 
 
 Future<void> _confirmDeleteDialog(
-    Workshop passedWorkshop, BuildContext ctx, Faculty passedUser) async {
+    Workshop passedWorkshop, BuildContext ctx, Faculty passedUser,Club hosting) async {
   return showDialog<void>(
     context: ctx,
     barrierDismissible: false, // user must tap button!
@@ -243,20 +247,18 @@ Future<void> _confirmDeleteDialog(
           FlatButton(
             child: Text('Yes'),
             onPressed: () async {
-              // loadedClubs.remove(loadedClubs[0]);
               passedWorkshop.hostingClub.workshops.remove(passedWorkshop);
               final referenceDB = FirebaseDatabase.instance.reference();
               await referenceDB
                   .child("ClubWorkshops")
-                  .child(passedWorkshop.hostingClub.title)
+                  .child(hosting.title)
                   .child(passedWorkshop.title)
                   .remove();
-              Navigator.push(
+            Navigator.push(
                   ctx,
                   MaterialPageRoute(
-                      builder: (ctx) => WorkshopsView(
-                          exampleClub: passedWorkshop.hostingClub,
-                          user: passedUser)));
+                      builder: (context) =>
+                          BottomTabsScreen2(index: 1, user: passedUser)));
             },
           ),
           FlatButton(
@@ -270,3 +272,4 @@ Future<void> _confirmDeleteDialog(
     },
   );
 }
+

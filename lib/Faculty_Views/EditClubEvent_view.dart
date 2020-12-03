@@ -11,6 +11,8 @@ import 'package:psu_club/Models/Event.dart'as clubEvent;
 import 'package:psu_club/Models/Faculty.dart';
 import 'package:psu_club/Models/VolunteeringPosition.dart';
 
+import 'InternalClubEvent_view.dart';
+
 class EditClubEvent extends StatefulWidget {
   static const routeName = '/EditClubEvent';
   final FirebaseApp app;
@@ -23,7 +25,7 @@ class EditClubEvent extends StatefulWidget {
 
 class _EditClubEventState extends State<EditClubEvent> {
   Faculty _passedUser;
-String oldTitle;
+  String oldTitle;
   // evant to be submitted
   clubEvent.Event _oldEvent;
   clubEvent.Event _newEvent;
@@ -245,7 +247,7 @@ Text showText(){
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                      Navigator.pop(context);
                   },
                 ),
                 Text('Edit Club Event'),
