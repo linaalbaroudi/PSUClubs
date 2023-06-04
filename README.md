@@ -1,17 +1,16 @@
 # psu_club
 
-A new Flutter project.
+Graduation project for Prince Sultan University
+Made by Lina Albaroudi, Hala Murad, and Tala Almashat
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-The manual is provided in pdf
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app manages clubs activities in PSU.
+It allows students to 
+- browse clubs' events and workshops
+- register in those events and workshops
+- enrol in a club
+- earn certifications 
+Faculty can also use the app to:
+- monitor clubs, events, and workshops
+- add, update, and delete clubs, events, and workshops
+- review and control registerations
+- issue certificates to students
